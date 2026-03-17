@@ -1,11 +1,66 @@
+/* ============================================
+   THEME VARIABLES — dark (default) & light
+   ============================================ */
+:root {
+    --bg-overlay: rgba(0, 0, 0, 0.92);
+    --bg-color: #000000;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --text-dim: rgba(255, 255, 255, 0.15);
+    --border-subtle: rgba(255, 255, 255, 0.10);
+    --border-hover: rgba(255, 255, 255, 0.30);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-bg-hover: rgba(255, 255, 255, 0.05);
+    --tag-bg: rgba(255, 255, 255, 0.08);
+    --tag-bg-hover: rgba(255, 255, 255, 0.12);
+    --nav-bg: rgba(24, 24, 27, 0.90);
+    /* zinc-900/90 */
+    --nav-border: rgba(63, 63, 70, 1);
+    /* zinc-700 */
+    --mobile-menu-bg: rgba(0, 0, 0, 0.95);
+    --highlight-glow: rgba(255, 255, 255, 0.4);
+    --theme-transition: background 0.4s ease, color 0.4s ease,
+        border-color 0.4s ease, background-color 0.4s ease;
+}
+
+[data-theme="light"] {
+    --bg-overlay: rgba(245, 243, 235, 0.94);
+    --bg-color: #f5f3eb;
+    --text-primary: #111111;
+    --text-muted: rgba(17, 17, 17, 0.55);
+    --text-dim: rgba(17, 17, 17, 0.15);
+    --border-subtle: rgba(17, 17, 17, 0.12);
+    --border-hover: rgba(17, 17, 17, 0.30);
+    --card-bg: rgba(17, 17, 17, 0.04);
+    --card-bg-hover: rgba(17, 17, 17, 0.07);
+    --tag-bg: rgba(17, 17, 17, 0.07);
+    --tag-bg-hover: rgba(17, 17, 17, 0.12);
+    --nav-bg: rgba(245, 243, 235, 0.88);
+    --nav-border: rgba(17, 17, 17, 0.12);
+    --mobile-menu-bg: rgba(245, 243, 235, 0.97);
+    --highlight-glow: rgba(17, 17, 17, 0.25);
+}
+
 /* BASE STYLES */
 body {
     font-family: 'Space Mono', monospace;
-    background-color: #000000;
-    color: #ffffff;
+    /* Backdrop baked into body background so it never shows through low-opacity elements.
+       Two-layer background: semi-transparent overlay + fixed net image underneath. */
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+        url('netbackdrop.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text-primary);
     overflow-x: hidden;
     overflow-y: auto;
+    transition: var(--theme-transition);
 }
+
+
 
 /* --- PRELOADER ANIMATION CSS (Speed Up Version) --- */
 .preloader {
@@ -70,9 +125,9 @@ body {
     transform: translateX(-50%);
     z-index: 10000;
     padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    background: var(--card-bg-hover);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
     font-size: 11.2px;
     font-weight: 500;
     text-transform: uppercase;
@@ -87,8 +142,8 @@ body {
 
 .skip-button:hover {
     background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    color: #ffffff;
+    border-color: var(--border-hover);
+    color: var(--text-primary);
     transform: translateX(-50%) translateY(-2px);
 }
 
@@ -123,14 +178,95 @@ body {
 
 /* Active navigation link highlighting */
 .nav-link.active {
-    color: #ffffff !important;
+    color: var(--text-primary) !important;
 }
+
+/* ============================================
+   THEME TOGGLE BUTTON — moon / sun
+   ============================================ */
+.theme-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease,
+        transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background: var(--card-bg-hover);
+    border-color: var(--border-hover);
+    transform: scale(1.1);
+    box-shadow: 0 0 12px var(--highlight-glow);
+}
+
+/* Floating toggles outside nav pill */
+.theme-toggle--floating {
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: var(--nav-bg);
+    border: 1px solid var(--nav-border);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+}
+
+.theme-toggle--floating:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle--floating {
+        right: 16px;
+        width: 38px;
+        height: 38px;
+    }
+}
+
+.theme-icon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dark mode: show moon, hide sun */
+.theme-icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+.theme-icon-sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+/* Light mode: show sun, hide moon */
+[data-theme="light"] .theme-icon-moon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+[data-theme="light"] .theme-icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
 
 /* MOBILE MENU STYLES */
 .mobile-menu {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--mobile-menu-bg);
     backdrop-filter: blur(10px);
     z-index: 9998;
     opacity: 0;
@@ -159,8 +295,8 @@ body {
     top: 32px;
     right: 32px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -172,8 +308,8 @@ body {
 }
 
 .mobile-menu-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: var(--card-bg-hover);
+    border-color: var(--border-hover);
     transform: rotate(90deg);
 }
 
@@ -189,14 +325,14 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-muted);
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
 }
 
 .mobile-nav-link:hover {
-    color: #ffffff;
+    color: var(--text-primary);
     transform: translateX(10px);
 }
 
@@ -208,7 +344,7 @@ body {
     transform: translateY(-50%) scaleX(0);
     width: 16px;
     height: 2px;
-    background: #ffffff;
+    background: var(--text-primary);
     transition: transform 0.3s ease;
 }
 
@@ -222,12 +358,12 @@ body {
     gap: 8px;
     margin-top: 16px;
     padding: 12px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-subtle);
     border-radius: 9999px;
 }
 
 .mobile-nav-resume:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--card-bg-hover);
     transform: translateX(0) translateY(-2px);
 }
 
@@ -266,24 +402,7 @@ body {
     /* Prevent horizontal scroll from animated elements */
 }
 
-/* Background image with controlled opacity - TEMPORARILY DISABLED */
-/*
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background-image: url('netbackdrop.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.08;
-    z-index: 0;
-    pointer-events: none;
-}
-*/
+/* Global backdrop is handled by a fixed element in HTML */
 
 .hero-container {
     position: relative;
@@ -313,7 +432,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: clamp(28.8px, 4vw, 48px);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0 0 4px 0;
     letter-spacing: 0.05em;
     transform: translateY(-3px);
@@ -322,7 +441,7 @@ body {
 .welcome-subtitle {
     font-family: 'Space Mono', monospace;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-muted);
     margin: 0;
     font-style: italic;
     transform: translateY(-11px);
@@ -344,7 +463,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 16px;
     line-height: 1.8;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     font-weight: 400;
 }
@@ -398,7 +517,7 @@ body {
 .photo-caption {
     font-family: 'Space Mono', monospace;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-muted);
     margin: 0;
     font-style: italic;
     text-align: center;
@@ -422,7 +541,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 14.4px;
     line-height: 1.6;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     font-weight: 400;
 }
@@ -445,7 +564,7 @@ body {
     font-size: clamp(40px, 6vw, 88px);
     font-weight: 700;
     line-height: 0.85;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.05em;
 }
@@ -476,14 +595,14 @@ body {
 }
 
 .swipe-indicator i {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
 }
 
 .scroll-text {
     font-family: 'Space Mono', monospace;
     font-size: 0.7rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
     letter-spacing: 0.15em;
     margin-top: 4px;
 }
@@ -617,24 +736,7 @@ body {
     overflow: hidden;
 }
 
-/* Background image with controlled opacity - TEMPORARILY DISABLED */
-/*
-.about-section::before {
-    content: '';
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background-image: url('netbackdrop.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.08;
-    z-index: 0;
-    pointer-events: none;
-}
-*/
+/* Global backdrop is handled by a fixed element in HTML */
 
 .about-container {
     position: sticky;
@@ -657,7 +759,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: clamp(24px, 4vw, 40px);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.15);
+    color: var(--text-dim);
     text-align: center;
     margin: 0 0 48px 0;
     font-weight: 700;
@@ -672,7 +774,7 @@ body {
 /* Individual letter highlighting & scattering */
 .about-letter {
     display: inline-block;
-    color: rgba(255, 255, 255, 0.15);
+    color: var(--text-dim);
     transition: color 0.1s ease-out, text-shadow 0.1s ease-out;
     will-change: transform, opacity, color;
     /* Added translateZ to support hardware acceleration when JS controls transforms */
@@ -680,8 +782,8 @@ body {
 }
 
 .about-letter.highlighted {
-    color: #ffffff;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    color: var(--text-primary);
+    text-shadow: 0 0 15px var(--highlight-glow);
 }
 
 .know-more-link {
@@ -690,7 +792,7 @@ body {
     gap: 0.5rem;
     font-family: 'Space Mono', monospace;
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-muted);
     text-decoration: none;
     transition: all 0.5s ease;
     padding: 0.5rem 1rem;
@@ -708,7 +810,7 @@ body {
 }
 
 .know-more-link.visible:hover {
-    color: #ffffff;
+    color: var(--text-primary);
     transform: translateX(5px);
 }
 
@@ -745,17 +847,19 @@ body {
     flex-direction: column;
     padding: 120px 64px 96px;
     position: relative;
-    max-width: 1600px;
-    margin: 0 auto;
     width: 100%;
+    /* Removed max-width and margin to allow backdrop to span full width */
 }
+
+
 
 /* Projects Header with Category List */
 .projects-header-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 80px;
+    margin: 0 auto 80px auto;
+    max-width: 1600px;
     gap: 64px;
     width: 100%;
 }
@@ -769,7 +873,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: clamp(32px, 5vw, 56px);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0 0 8px 0;
     letter-spacing: 0.02em;
     line-height: 1.2;
@@ -778,7 +882,7 @@ body {
 .projects-subtitle {
     font-family: 'Space Mono', monospace;
     font-size: clamp(14px, 2vw, 16px);
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-muted);
     margin: 0;
     font-style: italic;
     line-height: 1.6;
@@ -796,7 +900,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 12px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -805,9 +909,9 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 16px;
     font-weight: 400;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
     border-radius: 6px;
     padding: 12px 40px 12px 16px;
     cursor: pointer;
@@ -821,43 +925,46 @@ body {
 }
 
 .category-dropdown:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--tag-bg);
     background-position: right 16px center;
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--text-muted);
 }
 
 .category-dropdown:focus {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--card-bg-hover);
     background-position: right 16px center;
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--border-hover);
 }
 
 .category-dropdown option {
     background: #1a1a1a;
-    color: #ffffff;
+    color: var(--text-primary);
     padding: 12px;
 }
 
 /* Projects Container */
 .projects-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
+    /* Reduced from 1400px so cards don't stretch as much */
     margin: 0 auto;
 }
 
 /* Projects Grid */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 32px;
+    /* Use auto-fill to create empty columns instead of stretching items when there are only a few */
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 48px;
+    /* Increased gap slightly for better breathing room */
     width: 100%;
 }
 
 /* Project Card */
 .project-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -885,8 +992,8 @@ body {
 
 .project-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-subtle);
+    background: var(--card-bg-hover);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -895,7 +1002,7 @@ body {
     width: 100%;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg-hover);
     position: relative;
 }
 
@@ -907,7 +1014,7 @@ body {
     justify-content: center;
     font-family: 'Space Mono', monospace;
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
 }
 
@@ -924,7 +1031,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 20px;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0 0 12px 0;
     line-height: 1.3;
 }
@@ -933,7 +1040,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-muted);
     margin: 0 0 16px 0;
     padding-top: 4px;
 }
@@ -949,9 +1056,9 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 11px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    border: 1px solid var(--border-subtle);
     border-radius: 6px;
     padding: 6px 12px;
     text-transform: uppercase;
@@ -960,9 +1067,9 @@ body {
 }
 
 .tag:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    background: var(--tag-bg-hover);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
 }
 
 /* Responsive Design */
@@ -1053,4 +1160,304 @@ body {
     .project-info {
         padding: 20px;
     }
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+
+.contact-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 380px 48px 10px;
+    /* Removed bottom padding */
+    /* Increased top padding to push everything down */
+    position: relative;
+    text-align: center;
+    /* Removed gap: 36px because it forces a massive gap between the email and the socials */
+}
+
+/* --- Headline block: centered, two big lines --- */
+.contact-headline-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.contact-headline {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(48px, 8vw, 110px);
+    font-weight: 700;
+    line-height: 1.0;
+    color: var(--text-primary);
+    margin: 0;
+    /* Negative letter spacing helps pull Wide Monospace characters together */
+    letter-spacing: -0.05em;
+    transition: color 0.4s ease;
+    white-space: nowrap;
+}
+
+/* Second line — italic, slightly smaller, muted */
+.contact-headline--italic {
+    font-style: italic;
+    font-size: clamp(28px, 4.5vw, 60px);
+    /* Made notably smaller */
+    color: var(--text-muted);
+    letter-spacing: -0.04em;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    /* Reduced to pull subtext closer */
+}
+
+/* --- Subtext --- */
+.contact-subtext {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(13px, 1.5vw, 16px);
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin: 0;
+    margin-top: 36px;
+    /* Replaced the section gap here */
+    max-width: 520px;
+    padding-bottom: 24px;
+    /* Added padding under description */
+}
+
+/* --- Email CTA --- */
+.contact-email {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(14px, 1.6vw, 18px);
+    /* slightly bumped up the email size too */
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    position: relative;
+    padding-bottom: 4px;
+    display: block;
+    margin-top: 240px;
+    /* Force the email way down the page */
+    margin-bottom: 12px;
+    /* Small, tightly controlled gap between email and socials */
+    transition: color 0.3s ease;
+}
+
+/* underline removed per request */
+
+/* --- Social links row --- */
+.contact-socials {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0px;
+    /* Email margin-bottom handles the gap now */
+    padding-bottom: 32px;
+    /* Pad the absolute bottom of the section */
+}
+
+.contact-social-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    /* Increased from 11px */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-social-link:hover {
+    color: var(--text-primary);
+}
+
+.contact-social-sep {
+    color: var(--border-subtle);
+    font-size: 18px;
+    /* Bumped up separator size too */
+    user-select: none;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 96px 24px 64px;
+        gap: 28px;
+    }
+
+    .contact-headline {
+        font-size: clamp(36px, 10vw, 72px);
+        white-space: normal;
+    }
+
+    .contact-headline--italic {
+        font-size: clamp(28px, 8vw, 56px);
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-headline {
+        font-size: clamp(28px, 12vw, 48px);
+    }
+
+    .contact-headline--italic {
+        font-size: clamp(22px, 10vw, 38px);
+    }
+}
+
+
+/* ============================================
+   LIGHT MODE OVERRIDES
+   Covers elements styled via Tailwind or other
+   hardcoded values that CSS variables don't reach.
+   ============================================ */
+
+/* Navbar pill */
+[data-theme="light"] nav.bg-zinc-900\/90 {
+    background-color: var(--nav-bg) !important;
+    border-color: var(--nav-border) !important;
+}
+
+[data-theme="light"] .nav-link {
+    color: rgba(17, 17, 17, 0.6) !important;
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active {
+    color: #111111 !important;
+}
+
+[data-theme="light"] #navbar-container a {
+    color: rgba(17, 17, 17, 0.8);
+}
+
+[data-theme="light"] #navbar-container a:hover {
+    color: #111111;
+}
+
+[data-theme="light"] #mobile-menu-toggle {
+    color: #111111;
+}
+
+/* Hero text */
+[data-theme="light"] .malayalam-text,
+[data-theme="light"] .hero-skills-left p,
+[data-theme="light"] .hero-quote-right p,
+[data-theme="light"] .hero-name-right h1 {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .welcome-subtitle,
+[data-theme="light"] .photo-caption,
+[data-theme="light"] .scroll-text {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .swipe-line {
+    background: rgba(17, 17, 17, 0.3);
+}
+
+[data-theme="light"] .swipe-indicator i {
+    color: rgba(17, 17, 17, 0.5);
+}
+
+/* About section */
+[data-theme="light"] .about-text,
+[data-theme="light"] .about-letter {
+    color: var(--text-dim);
+}
+
+[data-theme="light"] .about-letter.highlighted {
+    color: var(--text-primary);
+    text-shadow: 0 0 15px var(--highlight-glow);
+}
+
+[data-theme="light"] .know-more-link {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .know-more-link.visible:hover {
+    color: var(--text-primary);
+}
+
+/* Project cards */
+[data-theme="light"] .project-card {
+    background: var(--card-bg);
+    border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .project-card:hover {
+    background: var(--card-bg-hover);
+    border-color: var(--border-hover);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .project-image-wrapper {
+    background: var(--card-bg-hover);
+}
+
+[data-theme="light"] .project-image-placeholder {
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.04) 0%, rgba(17, 17, 17, 0.02) 100%);
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .project-card:hover .project-image-placeholder {
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.07) 0%, rgba(17, 17, 17, 0.04) 100%);
+}
+
+[data-theme="light"] .project-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .project-description {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .tag {
+    background: var(--tag-bg);
+    border-color: var(--border-subtle);
+    color: rgba(17, 17, 17, 0.7);
+}
+
+[data-theme="light"] .tag:hover {
+    background: var(--tag-bg-hover);
+    color: var(--text-primary);
+}
+
+/* Category dropdown */
+[data-theme="light"] .category-label {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .category-dropdown {
+    color: var(--text-primary);
+    background-color: var(--card-bg);
+    border-color: var(--border-subtle);
+    /* Invert SVG arrow so it looks dark */
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 2L8 8L14 2' stroke='%23111' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .category-dropdown option {
+    background: #f5f3eb;
+    color: #111111;
+}
+
+/* Projects section title & subtitle */
+[data-theme="light"] .projects-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .projects-subtitle {
+    color: var(--text-muted);
 }

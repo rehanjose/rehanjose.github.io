@@ -1,0 +1,702 @@
+/* BASE STYLES */
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* --- PRELOADER ANIMATION CSS (Speed Up Version) --- */
+.preloader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.loader-text {
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(100%);
+    position: absolute;
+    white-space: nowrap;
+    letter-spacing: -0.05em;
+}
+
+/* CHANGED: Duration 0.8s -> 0.5s for snappier movement */
+.text-enter {
+    animation: text-in 0.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+.text-exit {
+    animation: text-out 0.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+@keyframes text-in {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes text-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+/* Skip Button Styles */
+.skip-button {
+    position: fixed;
+    bottom: 56px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11.2px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+    /* Allow clicks even though parent has pointer-events: none */
+}
+
+.skip-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.skip-button:active {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* RESPONSIVE ADJUSTMENTS FOR MOBILE */
+@media (max-width: 768px) {
+    .skip-button {
+        bottom: 32px;
+        font-size: 10.4px;
+        padding: 6.4px 12.8px;
+    }
+
+    .loader-text {
+        font-size: clamp(24px, 8vw, 48px);
+        padding: 0 16px;
+        text-align: center;
+    }
+}
+
+/* NAVIGATION LOGO SPACING */
+.nav-logo {
+    margin-left: 8px;
+}
+
+/* NAVBAR FIXED AT TOP - Always visible */
+#navbar-container {
+    transition: none;
+}
+
+/* Active navigation link highlighting */
+.nav-link.active {
+    color: #ffffff !important;
+}
+
+/* MOBILE MENU STYLES */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-menu-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg);
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+}
+
+.mobile-nav-link {
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.mobile-nav-link:hover {
+    color: #ffffff;
+    transform: translateX(10px);
+}
+
+.mobile-nav-link::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(0);
+    width: 16px;
+    height: 2px;
+    background: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav-link:hover::before {
+    transform: translateY(-50%) scaleX(1);
+}
+
+.mobile-nav-resume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+}
+
+.mobile-nav-resume:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(0) translateY(-2px);
+}
+
+/* Hide mobile menu on larger screens */
+@media (min-width: 768px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+/* --- HOMEPAGE REVEAL ANIMATION --- */
+#main-content {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#main-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   HERO SECTION - EXACT REFERENCE REPLICA
+   ============================================ */
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 160px 32px 64px;
+    position: relative;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from animated elements */
+}
+
+/* Background image with controlled opacity - TEMPORARILY DISABLED */
+/*
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-image: url('netbackdrop.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+*/
+
+.hero-container {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    padding: 0 64px;
+}
+
+/* Top Left: Malayalam Welcome */
+.hero-welcome-left {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    will-change: transform, opacity;
+}
+
+.malayalam-text {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(28.8px, 4vw, 48px);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    letter-spacing: 0.05em;
+    transform: translateY(-3px);
+}
+
+.welcome-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    font-style: italic;
+    transform: translateY(-11px);
+}
+
+/* Bottom Left: Skills */
+.hero-skills-left {
+    position: absolute;
+    bottom: calc(50% - clamp(175px, 14vw, 225px) + 11px);
+    left: 62px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    will-change: transform, opacity;
+}
+
+.hero-skills-left p {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+}
+
+.hero-skills-left p:last-child {
+    margin-bottom: 0;
+}
+
+/* Center: Profile Image with Caption */
+.hero-image {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    will-change: transform, opacity;
+}
+
+.photo-wrapper {
+    position: relative;
+    width: clamp(350px, 28vw, 450px);
+    height: clamp(350px, 28vw, 450px);
+}
+
+.hero-image .profile-photo {
+    width: clamp(350px, 28vw, 450px);
+    height: clamp(350px, 28vw, 450px);
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-image .profile-photo.grayscale {
+    z-index: 1;
+}
+
+.hero-image .profile-photo.colorful {
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.photo-wrapper:hover .profile-photo.colorful {
+    opacity: 1;
+}
+
+.photo-caption {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Wave Emoji Overlay (REMOVED) */
+
+
+
+/* Top Right: Quote */
+.hero-quote-right {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    max-width: 280px;
+    text-align: right;
+    will-change: transform, opacity;
+}
+
+.hero-quote-right p {
+    font-family: 'Space Mono', monospace;
+    font-size: 14.4px;
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Bottom Right: HUGE Name that OVERLAPS image */
+.hero-name-right {
+    position: absolute;
+    bottom: calc(50% - clamp(175px, 14vw, 225px) + 12px);
+    right: 52px;
+    z-index: 10;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    will-change: transform, opacity;
+}
+
+.hero-name-right h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(40px, 6vw, 88px);
+    font-weight: 700;
+    line-height: 0.85;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.05em;
+}
+
+.hero-name-right h1 br {
+    display: block;
+    content: "";
+    margin: 0;
+}
+
+/* Swipe Down Indicator */
+.swipe-indicator {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: float-vertical 2s ease-in-out infinite;
+}
+
+.swipe-line {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.swipe-indicator i {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.scroll-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+}
+
+@keyframes float-vertical {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .hero-name-right h1 {
+        font-size: clamp(35.2px, 6vw, 80px);
+    }
+
+    .photo-wrapper,
+    .hero-image .profile-photo {
+        width: clamp(300px, 25vw, 380px);
+        height: clamp(300px, 25vw, 380px);
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-container {
+        flex-direction: column;
+        min-height: auto;
+        gap: 48px;
+    }
+
+    .hero-welcome-left,
+    .hero-skills-left,
+    .hero-image,
+    .hero-quote-right,
+    .hero-name-right {
+        position: static;
+    }
+
+    .hero-welcome-left {
+        order: 1;
+        text-align: center;
+    }
+
+    .hero-image {
+        order: 2;
+    }
+
+    .photo-wrapper,
+    .hero-image .profile-photo {
+        width: 320px;
+        height: 320px;
+    }
+
+    .hero-skills-left {
+        order: 3;
+        text-align: center;
+    }
+
+    .hero-quote-right {
+        order: 4;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-name-right {
+        order: 5;
+        text-align: center;
+    }
+
+    .hero-name-right h1 {
+        font-size: clamp(35.2px, 10vw, 72px);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-section {
+        padding: 96px 24px 64px;
+    }
+
+    .photo-wrapper,
+    .hero-image .profile-photo {
+        width: 280px;
+        height: 280px;
+    }
+
+    .hero-quote-right p {
+        font-size: 12.8px;
+    }
+
+    .hero-name-right h1 {
+        font-size: clamp(32px, 12vw, 56px);
+    }
+
+    .hero-skills-left p {
+        font-size: 0.875rem;
+    }
+
+    .malayalam-text {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .swipe-indicator {
+        bottom: 2rem;
+    }
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+
+.about-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 96px 32px;
+    position: relative;
+    /* overflow: hidden; */
+    /* Temporarily disabled for backdrop removal */
+}
+
+/* Background image with controlled opacity - TEMPORARILY DISABLED */
+/*
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-image: url('netbackdrop.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+*/
+
+.about-container {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+    text-align: center;
+}
+
+.about-text {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1.6;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 32px 0;
+    font-weight: 400;
+}
+
+.know-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    position: relative;
+}
+
+.know-more-link:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+.know-more-link .arrow-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.know-more-link:hover .arrow-icon {
+    transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-section {
+        min-height: 40vh;
+        padding: 64px 24px;
+    }
+
+    .about-text {
+        font-size: clamp(16px, 4vw, 20px);
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section {
+        padding: 48px 16px;
+    }
+
+    .about-text {
+        font-size: 16px;
+    }
+}

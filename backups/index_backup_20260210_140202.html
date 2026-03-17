@@ -25,13 +25,6 @@
 
     <!-- Navigation (Outside main-content so it's always visible) -->
     <div id="navbar-container" class="fixed top-6 left-0 w-full flex justify-center z-50 px-4 navbar-visible">
-
-        <!-- Theme Toggle — floats to the right of the nav pill -->
-        <button id="theme-toggle" class="theme-toggle theme-toggle--floating" aria-label="Toggle light/dark mode">
-            <i data-lucide="moon" class="theme-icon theme-icon-moon w-4 h-4"></i>
-            <i data-lucide="sun" class="theme-icon theme-icon-sun  w-4 h-4"></i>
-        </button>
-
         <nav
             class="bg-zinc-900/90 backdrop-blur-md border border-zinc-800 shadow-2xl rounded-full px-6 py-3 w-full max-w-2xl">
             <div class="flex items-center justify-between">
@@ -131,109 +124,15 @@
 
         <!-- About Section -->
         <section id="about" class="about-section">
-            <div class="about-overflow-wrapper">
-                <div class="about-container">
-                    <h3 class="about-text" id="about-text">A Junior Year Communication Design student from NIFT Kannur,
-                        constantly experimenting, questioning, and figuring things out.</h3>
-                    <a href="#" class="know-more-link" id="about-link">
-                        <span>Know more about me</span>
-                        <i data-lucide="arrow-right" class="arrow-icon"></i>
-                    </a>
-                </div>
+            <div class="about-container">
+                <h3 class="about-text">A Junior Year Communication Design student from NIFT Kannur, constantly
+                    experimenting, questioning, and figuring things out.</h3>
+                <a href="#" class="know-more-link">
+                    <span>Know more about me</span>
+                    <i data-lucide="arrow-right" class="arrow-icon"></i>
+                </a>
             </div>
         </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects-section">
-            <!-- Projects Header with Category List -->
-            <div class="projects-header-wrapper">
-                <div class="projects-header-left">
-                    <h2 class="projects-title">PROJECTS</h2>
-                    <p class="projects-subtitle">A curated collection of my work across design disciplines</p>
-                </div>
-
-                <div class="category-dropdown-wrapper">
-                    <label for="category-select" class="category-label">My Design Spectrum</label>
-                    <select id="category-select" class="category-dropdown">
-                        <option value="product-design">Product Design</option>
-                        <option value="ui-ux">UI/UX</option>
-                        <option value="3d">3D</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="projects-container">
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-card" data-category="product-design">
-                        <div class="project-image-wrapper">
-                            <div class="project-image-placeholder">Project Image</div>
-                        </div>
-                        <div class="project-info">
-                            <div class="project-tags mb-4">
-                                <span class="tag">B2C</span>
-                                <span class="tag">Landing Page</span>
-                            </div>
-                            <h3 class="project-title">Reducing the returns rate post purchase</h3>
-                            <p class="project-description">A project that provided significant insights into user
-                                perceptions of refurbished items</p>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card" data-category="product-design">
-                        <div class="project-image-wrapper">
-                            <div class="project-image-placeholder">Project Image</div>
-                        </div>
-                        <div class="project-info">
-                            <div class="project-tags mb-4">
-                                <span class="tag">B2C</span>
-                                <span class="tag">Loyalty program</span>
-                                <span class="tag">Merchandising</span>
-                            </div>
-                            <h3 class="project-title">Reducing the bounce rate and increasing the repeat visits</h3>
-                            <p class="project-description">An analysis of how I mitigated the bounce rate by creating a
-                                fully new user experience</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-
-            <!-- Big headline -->
-            <div class="contact-headline-wrap">
-                <h2 class="contact-headline">strategy? visuals?</h2>
-                <h2 class="contact-headline contact-headline--italic">or a crazy idea at 2AM?</h2>
-            </div>
-
-            <!-- Subtext -->
-            <p class="contact-subtext">
-                I'm always open to conversations about design,<br>
-                collaboration, and creative experiments.
-            </p>
-
-            <!-- Email CTA -->
-            <a href="mailto:rehanjose11@gmail.com" class="contact-email">
-                rehanjose11@gmail.com
-            </a>
-
-            <!-- Social Links -->
-            <nav class="contact-socials" aria-label="Social links">
-                <a href="https://linkedin.com" target="_blank" class="contact-social-link">LinkedIn</a>
-                <span class="contact-social-sep">·</span>
-                <a href="https://behance.net" target="_blank" class="contact-social-link">Behance</a>
-                <span class="contact-social-sep">·</span>
-                <a href="https://wordpress.com" target="_blank" class="contact-social-link">WordPress</a>
-                <span class="contact-social-sep">·</span>
-                <a href="https://instagram.com" target="_blank" class="contact-social-link">Instagram</a>
-            </nav>
-
-        </section>
-
     </div>
 
     <!-- Custom JavaScript -->

@@ -1,4 +1,10 @@
-//Initialize Lucide icons
+// --- THEME TOGGLE (init before anything else to avoid FOUC) ---
+(function () {
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+})();
+
+// Initialize Lucide icons
 lucide.createIcons();
 
 // --- PRELOADER LOGIC ---
@@ -122,6 +128,27 @@ mobileMenu.addEventListener('click', (e) => {
         closeMobileMenu();
     }
 });
+
+// --- THEME TOGGLE ---
+const themeToggle = document.getElementById('theme-toggle');
+
+function applyTheme(theme) {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+    }
+    localStorage.setItem('portfolio-theme', theme);
+    // Re-init Lucide so icon strokes get the right color
+    lucide.createIcons();
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        applyTheme(isLight ? 'dark' : 'light');
+    });
+}
 
 // Photo Click - Wave Emoji Animation (REMOVED)
 
@@ -392,8 +419,9 @@ if (aboutText && aboutSection && aboutContainer) {
                     const rz = physics.rotateZ * easedScramble;
 
                     // Maintain highlighted color during scramble
-                    letter.style.color = 'rgba(255, 255, 255, 1)';
-                    letter.style.textShadow = '0 0 15px rgba(255, 255, 255, 0.4)';
+                    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                    letter.style.color = isLight ? 'rgba(17,17,17,1)' : 'rgba(255,255,255,1)';
+                    letter.style.textShadow = `0 0 15px var(--highlight-glow)`;
 
                     // Apply huge 3D transform
                     letter.style.transform = `
