@@ -1475,19 +1475,17 @@ body {
    ============================================ */
 
 .contact-footer {
-    position: absolute;
-    bottom: 24px;
     width: 100%;
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-size: 8px;
-    /* Reduced from 10px */
     font-weight: 700;
     color: var(--text-muted);
     letter-spacing: 0.1em;
-    /* Reduced spacing between letters slightly */
     line-height: 1.8;
     opacity: 0.6;
+    margin-top: auto;
+    padding-top: 32px;
     transition: opacity 0.3s ease;
 }
 
