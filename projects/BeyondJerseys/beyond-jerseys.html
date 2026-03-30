@@ -74,15 +74,16 @@
     </div>
 
     <!-- Project Title Badge (Scrolls to Top) -->
-    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="fixed top-6 left-4 lg:left-12 z-[60] flex items-center px-5 py-3 rounded-full bg-zinc-900/30 backdrop-blur-xl border border-white/10 text-white shadow-xl text-xs font-bold uppercase tracking-widest font-mono cursor-pointer hover:bg-white hover:text-black hover:border-transparent transition-all duration-300" style="margin-top: 8px;">
+    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="fixed top-6 left-4 lg:left-12 z-[1001] flex items-center px-5 py-3 rounded-full bg-zinc-900/30 backdrop-blur-xl border border-white/10 text-white shadow-xl text-xs font-bold uppercase tracking-widest font-mono cursor-pointer hover:bg-white hover:text-black hover:border-transparent transition-all duration-300" style="margin-top: 8px;">
         <span>Beyond Jerseys</span>
     </a>
 
     <!-- Floating Back Button -->
-    <a href="../../index.html#projects" class="fixed top-6 right-4 lg:right-12 z-[60] flex items-center gap-2 px-5 py-3 rounded-full bg-zinc-900/30 backdrop-blur-xl border border-white/10 text-white hover:bg-white hover:text-black hover:border-transparent transition-all duration-300 shadow-xl text-xs font-bold uppercase tracking-widest" style="margin-top: 8px;">
+    <a href="../../index.html#projects" class="fixed top-6 right-4 lg:right-12 z-[1001] flex items-center gap-2 px-5 py-3 rounded-full bg-zinc-900/30 backdrop-blur-xl border border-white/10 text-white hover:bg-white hover:text-black hover:border-transparent transition-all duration-300 shadow-xl text-xs font-bold uppercase tracking-widest" style="margin-top: 8px;">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
         <span class="hidden sm:inline">Back to Projects</span>
         <span class="sm:hidden">Back</span>
+    </a>
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="mobile-menu">
         <div class="mobile-menu-content">
@@ -169,7 +170,8 @@
                 const img = document.createElement('img');
                 const fileName = (i === 1) ? 'rehan_sports.jpg' : `rehan_sports${i}.jpg`;
                 img.src = `book pages/${fileName}`;
-                img.loading = 'lazy'; // Important for performance with 64 high-res images
+                // Pre-load the first 6 pages for instant quality, lazy load the rest
+                if (i > 6) img.loading = 'lazy'; 
                 img.className = 'w-full h-full object-contain pointer-events-none';
                 
                 pageDiv.appendChild(img);
@@ -182,9 +184,9 @@
                 height: 800, // Matching the true 1:1 aspect ratio of the raw pages
                 size: "stretch", // Stretches to fill viewport while maintaining aspect ratio
                 minWidth: 315,
-                maxWidth: 1000,
+                maxWidth: 1500, // Increased for crispness on large screens
                 minHeight: 315,
-                maxHeight: 1000,
+                maxHeight: 1500, // Increased for crispness on large screens
                 maxShadowOpacity: 0.5,
                 showCover: true,
                 mobileScrollSupport: false
