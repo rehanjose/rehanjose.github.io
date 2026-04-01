@@ -387,7 +387,7 @@
 
         /* ── ZONE JOURNEY ── */
         .zone {
-            padding: 100px 60px;
+            padding: 60px 60px 100px;
             border-bottom: 1px solid var(--mid);
         }
 
@@ -439,11 +439,13 @@
 
         .zone-num {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 120px;
+            font-size: 110px;
             font-weight: 900;
-            color: rgba(214, 58, 42, 0.12);
-            line-height: 1;
-            margin-bottom: -20px;
+            color: var(--red);
+            line-height: 0.9;
+            margin-bottom: 0px;
+            opacity: 0.8;
+            transform: translateY(-8px);
         }
 
         .zone-title {
@@ -757,6 +759,60 @@
             color: var(--muted);
             font-size: 12px;
             margin-bottom: 6px;
+        }
+
+        /* ── PROCESS CAROUSEL ── */
+        .process-carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--mid);
+            background: var(--black);
+        }
+
+        .process-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+            cursor: grab;
+        }
+
+        .process-carousel:active {
+            cursor: grabbing;
+        }
+
+        .process-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .process-carousel-item {
+            flex: 0 0 80vw;
+            min-width: 300px;
+            scroll-snap-align: start;
+            border-right: 1px solid var(--mid);
+            position: relative;
+        }
+
+        .process-carousel-item img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .process-carousel-item {
+                flex: 0 0 45vw;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .process-carousel-item {
+                flex: 0 0 33.33vw;
+            }
         }
 
         /* ── NAVBAR & PORTFOLIO UI OVERRIDES ── */
@@ -1456,27 +1512,40 @@
 
 
 
-    <!-- PROCESS IMAGES GRID -->
-    <div
-        style="display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--mid); background: var(--black);">
-        <img src="process/1.png" alt="Process 1"
-            style="width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-right: 1px solid var(--mid); border-bottom: 1px solid var(--mid); display: block;">
-        <img src="process/2.png" alt="Process 2"
-            style="width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-right: 1px solid var(--mid); border-bottom: 1px solid var(--mid); display: block;">
-        <img src="process/3.png" alt="Process 3"
-            style="width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-bottom: 1px solid var(--mid); display: block;">
-        <img src="process/4.png" alt="Process 4"
-            style="width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-right: 1px solid var(--mid); display: block;">
-        <img src="process/5.png" alt="Process 5"
-            style="width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-right: 1px solid var(--mid); display: block;">
-        <img src="process/6.png" alt="Process 6"
-            style="width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block;">
+    <!-- ═══════════════════════════════════
+     06.5  VISUAL PROCESS
+═══════════════════════════════════ -->
+    <section style="padding: 80px 60px 40px; border-bottom: none; background: var(--black);">
+        <h2 class="big-text" style="font-size: 32px; opacity: 0.9;">The Process</h2>
+    </section>
+
+    <div class="process-carousel-wrapper">
+        <div class="process-carousel" id="processSlider">
+            <div class="process-carousel-item">
+                <img src="process/1.png" alt="Process 1">
+            </div>
+            <div class="process-carousel-item">
+                <img src="process/2.png" alt="Process 2">
+            </div>
+            <div class="process-carousel-item">
+                <img src="process/3.png" alt="Process 3">
+            </div>
+            <div class="process-carousel-item">
+                <img src="process/4.png" alt="Process 4">
+            </div>
+            <div class="process-carousel-item">
+                <img src="process/5.png" alt="Process 5">
+            </div>
+            <div class="process-carousel-item">
+                <img src="process/6.png" alt="Process 6">
+            </div>
+        </div>
     </div>
 
     <!-- ═══════════════════════════════════
      07  SPATIAL WALKTHROUGH
 ═══════════════════════════════════ -->
-    <section style="padding: 120px 60px 60px; border-bottom: none;">
+    <section style="padding: 120px 60px 20px; border-bottom: none;">
         <div class="label">10 — The Experience</div>
         <h2 class="big-text" style="max-width: 800px;">A journey through five zones</h2>
         <p class="body" style="max-width: 600px; margin-top: 24px; color: var(--muted);">The design is best understood
@@ -1540,7 +1609,7 @@
             <div>
                 <div class="zone-num">03</div>
                 <div class="zone-subtitle">Zone Three — Food Zone</div>
-                <h3 class="zone-title">Fried Express</h3>
+                <h3 class="zone-title">Food Zone</h3>
                 <div class="body">
                     <p>The food zone runs along the side wall — a series of colour-coded counters for popcorn,
                         beverages, snacks, and hot food. Each stall has its own identity: deep red, forest green, bright
@@ -1562,7 +1631,7 @@
                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
             </div>
             <div>
-                <div class="zone-num" style="color: rgba(214,58,42,0.25);">04</div>
+                <div class="zone-num">04</div>
                 <div class="zone-subtitle">Zone Four — The Tunnel</div>
                 <h3 class="zone-title">The Ritual</h3>
                 <div class="body">
@@ -1615,7 +1684,7 @@
         <div
             style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--mid); border: 1px solid var(--mid);">
             <div style="background: var(--black); padding: 40px 32px;">
-                <img src="main.jpg" alt="Wooden Pillars"
+                <img src="render images/9.jpg" alt="Wooden Pillars"
                     style="width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 24px; display: block;">
                 <h4
                     style="font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--white); margin-bottom: 10px;">
@@ -1625,7 +1694,7 @@
                     atmosphere.</p>
             </div>
             <div style="background: var(--black); padding: 40px 32px;">
-                <img src="zenunni.png" alt="Chevron Floor Detail"
+                <img src="render images/15.jpg" alt="Chevron Floor Detail"
                     style="width: 100%; aspect-ratio: 1; object-fit: cover; filter: grayscale(1); margin-bottom: 24px; display: block;">
                 <h4
                     style="font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--white); margin-bottom: 10px;">
@@ -1882,6 +1951,39 @@
     <script src="../../script.js"></script>
     <script>
         lucide.createIcons();
+
+        // Drag to scroll functionality for Process Carousel
+        const slider = document.getElementById('processSlider');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; 
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch support is native, but mouse drag needs this helper
     </script>
 
 </body>
