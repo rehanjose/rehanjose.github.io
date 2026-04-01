@@ -1510,13 +1510,63 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════
+     06.2  FLOOR PLAN
+═══════════════════════════════════ -->
+    <section style="padding: 120px 60px 40px;">
+        <div class="label">09.5 — The Layout</div>
+        <h2 class="big-text" style="max-width: 800px; margin-bottom: 4px;">The Floor Plan</h2>
+        <p class="body" style="font-size: 13px; color: var(--muted); text-transform: uppercase; margin-bottom: 60px; letter-spacing: 0.1em;">
+            Scale: 1:500 / Orientation: North</p>
+        
+        <div style="position: relative; max-width: 740px; margin: 0 auto; text-align: center;">
+            <img src="FloorPlan.png" alt="Stryde Floor Plan" style="max-width: 580px; width: 100%; height: auto; display: inline-block;">
+            
+            <!-- Compass SVG -->
+            <svg width="40" height="60" viewBox="0 0 40 60" style="position: absolute; top: 20px; right: 0; pointer-events: none;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="20" y="10" fill="var(--white)" font-size="10" font-family="'DM Mono', monospace" font-weight="bold" text-anchor="middle">N</text>
+                <text x="20" y="58" fill="var(--muted)" font-size="8" font-family="'DM Mono', monospace" text-anchor="middle">S</text>
+                <text x="5" y="34" fill="var(--muted)" font-size="8" font-family="'DM Mono', monospace" text-anchor="middle">W</text>
+                <text x="35" y="34" fill="var(--muted)" font-size="8" font-family="'DM Mono', monospace" text-anchor="middle">E</text>
+                <line x1="20" y1="16" x2="20" y2="48" stroke="var(--white)" stroke-width="1.5"/>
+                <line x1="10" y1="31" x2="30" y2="31" stroke="var(--white)" stroke-width="1.5"/>
+                <polygon points="20,14 16,20 24,20" fill="var(--white)"/>
+            </svg>
+        </div>
 
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 32px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 14px; height: 14px; background: #B23023;"></div>
+                Theatre
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 14px; height: 14px; background: #422614;"></div>
+                Food Zone
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 14px; height: 14px; background: #182C40;"></div>
+                Lobby
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 14px; height: 14px; background: #14291B;"></div>
+                Toilet
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 14px; height: 14px; border: 1px solid #686868; background: #6a6a6a;"></div>
+                Ticket Counter
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+            <p class="body" style="font-size: 14px; color: var(--muted);">0.5m for exterior walls, 0.3m for interior walls and 0.2m for toilet walls</p>
+        </div>
+    </section>
 
     <!-- ═══════════════════════════════════
      06.5  VISUAL PROCESS
 ═══════════════════════════════════ -->
     <section style="padding: 80px 60px 40px; border-bottom: none; background: var(--black);">
-        <h2 class="big-text" style="font-size: 32px; opacity: 0.9;">The Process</h2>
+        <h2 class="big-text" style="max-width: 800px; opacity: 0.9;">The Process</h2>
     </section>
 
     <div class="process-carousel-wrapper">
@@ -1739,6 +1789,7 @@
                 grid-template-columns: repeat(4, 1fr);
                 gap: 16px;
             }
+
             .gallery-img {
                 width: 100%;
                 aspect-ratio: 4/3;
@@ -1748,9 +1799,10 @@
                 cursor: pointer;
                 transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, filter 0.4s ease;
             }
+
             .gallery-img:hover {
                 transform: translateY(-6px) scale(1.03);
-                box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
                 filter: brightness(1.15);
                 z-index: 2;
                 position: relative;
@@ -1789,18 +1841,28 @@
     </section>
 
     <!-- LIGHTBOX UI -->
-    <div id="lightbox" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(14px); opacity: 0; transition: opacity 0.3s ease;">
-        <button id="lightbox-close" style="position: absolute; top: 30px; right: 40px; background: none; border: none; color: white; cursor: pointer; padding: 10px; z-index: 10000; transition: transform 0.2s;"><i data-lucide="x" style="width: 32px; height: 32px;"></i></button>
-        
-        <button id="lightbox-prev" style="position: absolute; left: 40px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; z-index: 10000; padding: 20px; transition: transform 0.2s;"><i data-lucide="chevron-left" style="width: 48px; height: 48px;"></i></button>
-        
-        <button id="lightbox-next" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; z-index: 10000; padding: 20px; transition: transform 0.2s;"><i data-lucide="chevron-right" style="width: 48px; height: 48px;"></i></button>
-        
-        <img id="lightbox-img" src="" alt="Expanded Render" style="max-width: 90vw; max-height: 90vh; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.8); transform: scale(0.95); transition: transform 0.3s ease;">
-        
-        <div id="lightbox-counter" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: 0.2em; color: var(--muted);">1 / 26</div>
+    <div id="lightbox"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(14px); opacity: 0; transition: opacity 0.3s ease;">
+        <button id="lightbox-close"
+            style="position: absolute; top: 30px; right: 40px; background: none; border: none; color: white; cursor: pointer; padding: 10px; z-index: 10000; transition: transform 0.2s;"><i
+                data-lucide="x" style="width: 32px; height: 32px;"></i></button>
+
+        <button id="lightbox-prev"
+            style="position: absolute; left: 40px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; z-index: 10000; padding: 20px; transition: transform 0.2s;"><i
+                data-lucide="chevron-left" style="width: 48px; height: 48px;"></i></button>
+
+        <button id="lightbox-next"
+            style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; z-index: 10000; padding: 20px; transition: transform 0.2s;"><i
+                data-lucide="chevron-right" style="width: 48px; height: 48px;"></i></button>
+
+        <img id="lightbox-img" src="" alt="Expanded Render"
+            style="max-width: 90vw; max-height: 90vh; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.8); transform: scale(0.95); transition: transform 0.3s ease;">
+
+        <div id="lightbox-counter"
+            style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: 0.2em; color: var(--muted);">
+            1 / 26</div>
     </div>
-    
+
     <script>
         const galleryImgs = document.querySelectorAll('.gallery-img');
         const lightbox = document.getElementById('lightbox');
@@ -1809,14 +1871,14 @@
         const lightboxPrev = document.getElementById('lightbox-prev');
         const lightboxNext = document.getElementById('lightbox-next');
         const lightboxCounter = document.getElementById('lightbox-counter');
-        
+
         let currentIndex = 0;
-        
+
         function updateLightbox(index) {
-            if(index < 0) index = galleryImgs.length - 1;
-            if(index >= galleryImgs.length) index = 0;
+            if (index < 0) index = galleryImgs.length - 1;
+            if (index >= galleryImgs.length) index = 0;
             currentIndex = index;
-            
+
             // Subtle transition effect
             lightboxImg.style.opacity = '0';
             setTimeout(() => {
@@ -1840,7 +1902,7 @@
                 document.body.style.overflow = 'hidden';
             });
         });
-        
+
         lightboxClose.addEventListener('click', () => {
             lightbox.style.opacity = '0';
             lightboxImg.style.transform = 'scale(0.95)';
@@ -1852,16 +1914,16 @@
 
         lightboxPrev.addEventListener('click', () => updateLightbox(currentIndex - 1));
         lightboxNext.addEventListener('click', () => updateLightbox(currentIndex + 1));
-        
+
         // Keyboard navigation bindings
         document.addEventListener('keydown', (e) => {
             if (lightbox.style.display === 'flex') {
-                if(e.key === 'Escape') lightboxClose.click();
-                if(e.key === 'ArrowLeft') lightboxPrev.click();
-                if(e.key === 'ArrowRight') lightboxNext.click();
+                if (e.key === 'Escape') lightboxClose.click();
+                if (e.key === 'ArrowLeft') lightboxPrev.click();
+                if (e.key === 'ArrowRight') lightboxNext.click();
             }
         });
-        
+
         // Add subtle hover animations for UI
         [lightboxPrev, lightboxNext, lightboxClose].forEach(btn => {
             btn.addEventListener('mouseenter', () => btn.style.transform = btn.id.includes('close') ? 'scale(1.2)' : 'translateY(-50%) scale(1.2)');
@@ -1979,7 +2041,7 @@
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; 
+            const walk = (x - startX) * 2;
             slider.scrollLeft = scrollLeft - walk;
         });
 
